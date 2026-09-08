@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cg58h8udfo3sh"]
+
+[ext_resource type="Texture2D" uid="uid://tdc8ytcyn0fg" path="res://pictures/Background.png" id="1_tbgi4"]
+[ext_resource type="Script" uid="uid://cgjtnc4cgtfd8" path="res://scenes/player.gd" id="2_tefeu"]
+[ext_resource type="Texture2D" uid="uid://2qxl3ru8ivw2" path="res://pictures/Character1.png" id="3_o6xl0"]
+[ext_resource type="Script" uid="uid://c73y86klm1mpx" path="res://scenes/monster.gd" id="4_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://bk18081r31tjr" path="res://pictures/Monster.png" id="4_tipki"]
+[ext_resource type="Script" uid="uid://c85c7fpg4tsou" path="res://scenes/coin_spawner.gd" id="5_85g3d"]
+[ext_resource type="PackedScene" uid="uid://du7wvplgcf3hw" path="res://scenes/moneta.tscn" id="6_tefeu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ubgmg"]
+radius = 24.0
+height = 90.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_68wy7"]
+radius = 39.0
+height = 78.0
+
+[node name="Main" type="Node2D" unique_id=443597790]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1140529281]
+z_index = -1
+position = Vector2(583.25, 329.75)
+scale = Vector2(0.5739746, 0.3186035)
+texture = ExtResource("1_tbgi4")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=776816133]
+script = ExtResource("2_tefeu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=2008104079]
+position = Vector2(148, 412)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("3_o6xl0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=146347470]
+position = Vector2(145, 398)
+shape = SubResource("CapsuleShape2D_ubgmg")
+
+[node name="Monster" type="CharacterBody2D" parent="." unique_id=1017388256 node_paths=PackedStringArray("player")]
+script = ExtResource("4_o6xl0")
+player = NodePath("../Player")
+
+[node name="Sprite2D" type="Sprite2D" parent="Monster" unique_id=229645802]
+position = Vector2(777, 338)
+texture = ExtResource("4_tipki")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster" unique_id=1416023550]
+position = Vector2(777, 342)
+shape = SubResource("CapsuleShape2D_68wy7")
+
+[node name="CoinSpawner" type="Node2D" parent="." unique_id=1607115077]
+script = ExtResource("5_85g3d")
+coin_scene = ExtResource("6_tefeu")
